@@ -4,15 +4,15 @@ This action prints "Hello World" or "Hello" + the name of a person to greet to t
 
 ## Inputs
 
-## `who-to-greet`
+## `images`
 
-**Required** The name of the person to greet. Default `"World"`.
+**Required** The list of images to patch. Separated by whitespace as arguments. Default `""`. This could be supplied by a trivy scan action? (or we can include this and list of images would be all images that the user wants to scan rather than patch)
 
 ## Outputs
 
-## `time`
+## `patched-images`
 
-The time we greeted you.
+The list of new patched images.
 
 ## Example usage
 

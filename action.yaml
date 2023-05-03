@@ -1,10 +1,10 @@
 name: 'Hello World'
 description: 'Greet someone and record the time'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  images:  # id of input
+    description: 'List of images to patch'
     required: true
-    default: 'World'
+    default: 'ghcr.io/azure/eraser:v1.1.0-beta.0'
 outputs:
   time: # id of output
     description: 'The time we greeted you'
