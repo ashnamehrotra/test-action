@@ -1,15 +1,14 @@
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: 'Copa'
+description: 'Patch Vulnerable Images'
 inputs:
-  images:  # id of input
-    description: 'List of images to patch'
+  imageReports:
+    description: 'List of trivy json reports from images to patch'
     required: true
-    default: 'ghcr.io/azure/eraser:v1.1.0-beta.0'
 outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+  patchedImages:
+    description: 'List of patched images'
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.who-to-greet }}
+    - ${{ inputs.imageReports }}
