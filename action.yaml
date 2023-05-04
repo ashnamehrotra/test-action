@@ -1,14 +1,17 @@
 name: 'Copa'
 description: 'Patch Vulnerable Images'
 inputs:
-  imageReports:
+  image-reports:
     description: 'List of trivy json reports from images to patch'
     required: true
+  buildkitd-address:
+    description: 'Address of running Buildkitd container'
+    required: true
 outputs:
-  patchedImages:
+  patched-images:
     description: 'List of patched images'
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.imageReports }}
+    - ${{ inputs.image-reports }}

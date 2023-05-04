@@ -1,17 +1,14 @@
 #!/bin/sh -l
 
-# for each image, run copa
-# if no errors, add to a list
-# save list into $GITHUB_OUTPUT
 
+imageReports=$1
+buildkitd=$2
 
-buildkitd --version
-copa patch -i mcr.microsoft.com/oss/nginx/nginx:1.21.6 -r /data/nginx.1.21.6.json -t 1.21.6-patched --addr tcp://0.0.0.0:8888
+# delimiter for trivy json reports
+IFS=','
 
-
-#for img in "$@"
-#do
-    # run copa
-#    echo "$img"
-#    copa patch -i mcr.microsoft.com/oss/nginx/nginx:1.21.6 -r nginx.1.21.6.json -t 1.21.6-patched
-#done
+for img in $imageReports
+do
+    # hardcoded for now, change to image name, image report, and buildkitd address
+    copa patch -i mcr.microsoft.com/oss/nginx/nginx:1.21.6 -r /data/nginx.1.21.6.json -t patched --addr $buildkitd
+done
