@@ -6,7 +6,7 @@ jobs:
         steps:
     
         - name: Set up Go 1.15.6
-          uses: actions/test-action@v1
+          uses: ashnamehrotra/test-action@v1
           with:
             image-reports: nginx.1.21.6.json
             buildkitd-address: tcp://0.0.0.0:8888
