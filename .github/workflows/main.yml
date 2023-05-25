@@ -4,21 +4,8 @@ jobs:
     test:
         runs-on: ubuntu-latest
         steps:
-    
-        - name: Set up Go 1.15.6
+        - name: copa action
           uses: ashnamehrotra/test-action@v1
           with:
             image-reports: nginx.1.21.6.json
             buildkitd-address: tcp://0.0.0.0:8888
-    hello_world_job:
-      runs-on: ubuntu-latest
-      name: A job to say hello
-      steps:
-        - name: Hello world action step
-          id: hello
-          uses: actions/hello-world-docker-action@v2
-          with:
-            who-to-greet: 'Mona the Octocat'
-        # Use the output from the `hello` step
-        - name: Get the output time
-          run: echo "The time was ${{ steps.hello.outputs.time }}"
