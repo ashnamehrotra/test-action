@@ -7,5 +7,5 @@ jobs:
         - name: copa action
           uses: ashnamehrotra/test-action@v1.1.1
           with:
-            image-reports: nginx.1.21.6.json
-            buildkitd-address: tcp://0.0.0.0:8888
+            image-reports: 'nginx.1.21.6.json'
+            buildkitd-address: 'tcp://0.0.0.0:8888'
