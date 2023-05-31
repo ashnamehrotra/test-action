@@ -19,10 +19,10 @@ jobs:
             echo "BUILDKITD_SOCKET=$BUILDKITD_SOCKET" >> $GITHUB_ENV
 
         - name: copa action
-          uses: ashnamehrotra/test-action@v1.1.8
+          uses: ashnamehrotra/test-action@v1.1.9
           with:
             image-reports: 'nginx.1.21.6.json'
-            buildkitd-address: 'tcp://buildkitd:8888'
+            buildkitd-address: unix://${{ env.BUILDKITD_SOCKET }}
           env:
             DOCKER_HOST: unix://${{ env.BUILDKITD_SOCKET }}
             DOCKER_BUILDKIT: 1
