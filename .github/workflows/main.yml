@@ -19,7 +19,7 @@ jobs:
             echo "BUILDKITD_SOCKET=$BUILDKITD_SOCKET" >> $GITHUB_ENV
 
         - name: copa action
-          uses: ashnamehrotra/test-action@v1.2.0
+          uses: ashnamehrotra/test-action@v1.3.0
           with:
             image-reports: 'nginx.1.21.6.json'
             buildkitd-address: unix://${{ env.BUILDKITD_SOCKET }}
