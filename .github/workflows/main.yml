@@ -4,13 +4,6 @@ jobs:
     test:
         runs-on: ubuntu-latest
 
-        services:
-          buildkitd:
-            image: moby/buildkit:v0.11.4
-            ports:
-              - 8888:8888
-            options: --privileged --name buildkitd --entrypoint buildkitd --addr tcp://0.0.0.0:8888
-
         steps:
         - name: Checkout repository
           uses: actions/checkout@v2
@@ -24,9 +17,10 @@ jobs:
             docker run --detach --rm --privileged -p 127.0.0.1:8888:8888 --network=mynetwork --name buildkitd --entrypoint buildkitd moby/buildkit:v0.11.4 --addr tcp://0.0.0.0:8888
 
         - name: copa action
-          uses: ashnamehrotra/test-action@v1.1.7
+          uses: ashnamehrotra/test-action@v1.1.8
           with:
             image-reports: 'nginx.1.21.6.json'
             buildkitd-address: 'tcp://buildkitd:8888'
           env:
+            DOCKER_HOST: tcp://localhost:8888
             DOCKER_BUILDKIT: 1
