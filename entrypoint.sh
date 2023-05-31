@@ -3,9 +3,6 @@
 # delimiter for trivy json reports
 IFS=','
 
-echo "$1"
-echo "$2"
-
 for img in $1
 do
     echo $img
