@@ -7,7 +7,8 @@ IFS=','
 # docker ps --format "table {{.ID}}\t{{.Names}}\t{{.Ports}}"
 
 # Install Docker CLI
-apk add --no-cache docker-cli
+apt-get update
+apt-get install -y docker.io
 
 # Start buildkitd container
 docker network create mynetwork
