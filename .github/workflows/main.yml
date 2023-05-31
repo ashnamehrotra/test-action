@@ -11,19 +11,12 @@ jobs:
         - name: Set up Docker Buildx to start Buildkit
           uses: docker/setup-buildx-action@v2
 
-        - name: Create and run buildkitd container
-          run: |
-            docker network create mynetwork
-            docker run --detach --rm --privileged -p 127.0.0.1:8888:8888 --network=mynetwork --name buildkitd --entrypoint buildkitd moby/buildkit:v0.11.4 --addr tcp://0.0.0.0:8888
-            BUILDKITD_IP=$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' buildkitd)
-            echo "BUILDKITD_IP=$BUILDKITD_IP" >> $GITHUB_ENV
-
         - name: copa action
-          uses: ashnamehrotra/test-action@v1.3.2
+          uses: ashnamehrotra/test-action@v1.1.4
           with:
             image-reports: 'nginx.1.21.6.json'
             buildkitd-address: tcp://${{ env.BUILDKITD_IP }}:8888
           env:
             DOCKER_HOST: tcp://${{ env.BUILDKITD_IP }}:8888
             DOCKER_BUILDKIT: 1
-            DOCKER_TLS_CERTDIR: ""
+
