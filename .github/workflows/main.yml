@@ -13,7 +13,7 @@ jobs:
             docker run --detach --rm --privileged -p 127.0.0.1:8888:8888 --name buildkitd --entrypoint buildkitd moby/buildkit:v0.11.4 --addr tcp://0.0.0.0:8888
 
         - name: copa action
-          uses: ashnamehrotra/test-action@v1.3.5
+          uses: ashnamehrotra/test-action@v1.3.6
           with:
             image-reports: 'nginx.1.21.6.json'
             buildkitd-address: 'tcp://127.0.0.1:8888'

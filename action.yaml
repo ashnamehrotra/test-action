@@ -20,4 +20,4 @@ runs:
     - name: docker run action
       shell: bash
       run : |
-        docker run --net=host copa-action ${{ github.events.inputs.image-reports }} ${{ github.events.inputs.buildkitd-address }} 
+        docker run --net=host copa-action ${{ inputs.image-reports }} ${{ inputs.buildkitd-address }} 
