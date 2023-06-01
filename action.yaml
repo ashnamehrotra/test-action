@@ -20,4 +20,4 @@ runs:
     - name: docker run action
       shell: bash
       run : |
-        docker run --net=host copa-action ${{ inputs.image-reports }} ${{ inputs.buildkitd-address }} 
+        docker run --net=host --mount=type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock copa-action ${{ inputs.image-reports }} ${{ inputs.buildkitd-address }} 
