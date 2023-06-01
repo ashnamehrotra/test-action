@@ -11,6 +11,7 @@ outputs:
   patched-images:
     description: 'List of patched images'
 runs:
+  using: "composite"
   steps: 
     - name: docker build action
       shell: bash
