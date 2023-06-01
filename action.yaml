@@ -11,8 +11,10 @@ outputs:
   patched-images:
     description: 'List of patched images'
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
-  args:
-    - ${{ inputs.image-reports }}
-    - ${{ inputs.buildkitd-address }}
+  steps: 
+    - name: docker build action
+      run: |
+        docker build -t copa-action .
+    - name: docker run action
+      run : |
+        docker run --net=host copa-action ${{ github.events.inputs.image-reports }} ${{ github.events.inputs.buildkitd-address }} 
