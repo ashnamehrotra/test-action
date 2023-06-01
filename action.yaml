@@ -13,8 +13,10 @@ outputs:
 runs:
   steps: 
     - name: docker build action
+      shell: bash
       run: |
         docker build -t copa-action .
     - name: docker run action
+      shell: bash
       run : |
         docker run --net=host copa-action ${{ github.events.inputs.image-reports }} ${{ github.events.inputs.buildkitd-address }} 
