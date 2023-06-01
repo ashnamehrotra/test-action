@@ -17,3 +17,9 @@ jobs:
           with:
             image-reports: 'nginx.1.21.6.json'
             buildkitd-address: 'tcp://127.0.0.1:8888'
+            
+        - name: Docker Push Image
+          uses: docker/build-push-action@v4
+          with:
+            push: true
+            tags: "mcr.microsoft.com/oss/nginx/nginx:patched"
