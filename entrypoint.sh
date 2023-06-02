@@ -12,11 +12,14 @@ do
     
     sudo copa patch -i "$image" -r /data/"$report" -t "patched_tag" --addr tcp://0.0.0.0:8888
 
+    echo "$image_no_tag:$patched_tag," >> $GITHUB_OUTPUT
+
     if [ $? -eq 0 ];  then
-        patched+="$image_no_tag:$patched_tag,"
+        echo "here"
+        # patched+="$image_no_tag:$patched_tag,"
     else
         echo "Error patching image $image with copa"
     fi
 done
 
-echo "patched-images=$patched" >> $GITHUB_OUTPUT
+# echo "patched-images=$PATCHED" >> $GITHUB_OUTPUT
