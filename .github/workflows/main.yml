@@ -14,13 +14,7 @@ jobs:
           with:
             image-reports: 'nginx.1.21.6.json'
 
-        outputs:
-          copa-output: ${{ steps.copa.outputs.patched-images }}
-      
-    test2:
-      needs: test
-      runs-on: ubuntu-latest
-      steps:
         - name: View Output
-          run: |
-            echo "copa output: ${{ needs.test.outputs.patched-images }}"
+          run: echo "${at}"
+          env:
+            at: ${{ steps.helcopalo.outputs.patched-images }}
