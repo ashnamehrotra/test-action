@@ -2,16 +2,20 @@
  
 # delimiter for trivy json reports
 IFS=','
-patched=()
+patched=""
 
 for report in $1
 do
-    image = "mcr.microsoft.com/oss/nginx/nginx:1.21.6"
-    tag = "patched"
+    image="mcr.microsoft.com/oss/nginx/nginx:1.21.6"
+    image_no_tag="mcr.microsoft.com/oss/nginx/nginx"
+    patched_tag="patched"
     
-    sudo copa patch -i "$image" -r /data/"$report" -t "tag" --addr tcp://0.0.0.0:8888
-    if [[ $? -eq 0 ]]; then
-        patched+=("$str1:$str2")
+    sudo copa patch -i "$image" -r /data/"$report" -t "patched_tag" --addr tcp://0.0.0.0:8888
+
+    if [ $? -eq 0 ];  then
+        patched+="$image_no_tag:$patched_tag,"
+    else
+        echo "Error patching image $image with copa"
     fi
 done
 
