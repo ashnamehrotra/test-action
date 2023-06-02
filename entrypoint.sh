@@ -19,4 +19,4 @@ do
     fi
 done
 
-echo "::set-output patched-images=patched-images::$PATCHED"
+echo "::set-output name=patched-images::$PATCHED"
