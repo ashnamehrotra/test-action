@@ -17,4 +17,4 @@ jobs:
         - name: View Output
           run: echo "${at}"
           env:
-            at: ${{ steps.helcopalo.outputs.patched-images }}
+            at: ${{ steps.copa.outputs.patched-images }}
