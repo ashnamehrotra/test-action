@@ -15,4 +15,4 @@ jobs:
             image-reports: 'nginx.1.21.6.json'
 
         - name: View Output
-          run: echo ${{ steps.copa.outputs.patched-images }}
+          run: echo "${{ steps.copa.outputs.patched-images }}"
