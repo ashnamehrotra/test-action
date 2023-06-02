@@ -13,6 +13,7 @@ do
     sudo copa patch -i "$image" -r /data/"$report" -t "$patched_tag" --addr tcp://0.0.0.0:8888
 
     if [ $? -eq 0 ];  then
+        "no copa error"
         PATCHED="$PATCHED,$image_no_tag:$patched_tag"
     else
         echo "Error patching image $image with copa"
