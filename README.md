@@ -8,10 +8,6 @@ This action patches images using [Copa](https://github.com/project-copacetic/cop
 
 **Required** The list of trivy json reports from images to patch.
 
-## `buildkitd-address`
-
-**Required** Address of running Buildkitd container.
-
 ## Outputs
 
 ## `patched-images`
@@ -41,10 +37,6 @@ jobs:
           output: 'nginx.1.21.6.json'
           ignore-unfixed: true
           vuln-type: 'os
-      - name: Set up Docker Buildx to start Buildkit
-        uses: docker/setup-buildx-action@v2
-        with: 
-          buildkitd-flags: '--addr tcp://0.0.0.0:8888'
       - name: patch
         uses: actions/copa@v1
         with:
