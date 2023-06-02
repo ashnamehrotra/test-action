@@ -2,7 +2,7 @@
  
 # delimiter for trivy json reports
 IFS=','
-patched=""
+export PATCHED=""
 
 for report in $1
 do
@@ -14,11 +14,10 @@ do
     sudo copa patch -i "$image" -r /data/"$report" -t "$patched_tag" --addr tcp://0.0.0.0:8888
 
     if [ $? -eq 0 ];  then
-        echo "here"
-        patched+="$image_no_tag:$patched_tag,"
+        PATCHED="$PATCHED,$image_no_tag:$patched_tag"
     else
         echo "Error patching image $image with copa"
     fi
 done
 
-# echo "patched-images=$PATCHED" >> $GITHUB_OUTPUT
+echo "patched-images=$PATCHED" >> $GITHUB_OUTPUT
