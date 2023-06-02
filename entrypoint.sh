@@ -6,7 +6,6 @@ export PATCHED=""
 
 for report in $1
 do
-    echo "in loop"
     image="mcr.microsoft.com/oss/nginx/nginx:1.21.6"
     image_no_tag="mcr.microsoft.com/oss/nginx/nginx"
     patched_tag="patched"
@@ -20,4 +19,4 @@ do
     fi
 done
 
-echo "patched-images=$PATCHED" >> $GITHUB_OUTPUT
+echo "::set-output patched-images=patched-images::$PATCHED"

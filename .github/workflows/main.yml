@@ -10,9 +10,9 @@ jobs:
 
         - name: copa action
           id: copa
-          uses: ashnamehrotra/test-action@v1.4.6
+          uses: ashnamehrotra/test-action@v1.4.7
           with:
-            image-reports: 'nginx.1.21.6.json,nginx.1.21.6.json,'
+            image-reports: 'nginx.1.21.6.json'
 
         - name: View Output
           run: |
