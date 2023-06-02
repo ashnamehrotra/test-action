@@ -4,9 +4,6 @@ inputs:
   image-reports:
     description: 'List of trivy json reports from images to patch'
     required: true
-  buildkitd-address:
-    description: 'Address of running Buildkitd container'
-    required: true
 outputs:
   patched-images:
     description: 'List of patched images'
@@ -17,7 +14,11 @@ runs:
       shell: bash
       run: |
         docker build -t copa-action .
-    - name: docker run action
+    - name: docker run buildkitd
+      shell: bash
+      run: |
+        docker run --net=host --detach --rm --privileged -p 127.0.0.1:8888:8888 --name buildkitd --entrypoint buildkitd moby/buildkit:v0.11.4 --addr tcp://0.0.0.0:8888
+    - name: docker run copa-action
       shell: bash
       run : |
-        docker run --net=host --mount=type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock copa-action ${{ inputs.image-reports }} ${{ inputs.buildkitd-address }} 
+        docker run --net=host --mount=type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock copa-action ${{ inputs.image-reports }} tcp://0.0.0.0:8888
