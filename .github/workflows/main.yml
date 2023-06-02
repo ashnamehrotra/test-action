@@ -9,6 +9,6 @@ jobs:
           uses: actions/checkout@v2
 
         - name: copa action
-          uses: ashnamehrotra/test-action@v1.4.2
+          uses: ashnamehrotra/test-action@v1.4.3
           with:
             image-reports: 'nginx.1.21.6.json, nginx.1.21.6.json,'
