@@ -19,4 +19,4 @@ do
     fi
 done
 
-echo "::set-output name=patched-images::'$PATCHED'"
+echo "patched-images=$PATCHED" >> $GITHUB_OUTPUT
