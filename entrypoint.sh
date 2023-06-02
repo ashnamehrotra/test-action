@@ -2,7 +2,7 @@
  
 # delimiter for trivy json reports
 IFS=','
-patched = ()
+patched=()
 
 for report in $1
 do
