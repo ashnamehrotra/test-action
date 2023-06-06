@@ -1,10 +1,10 @@
 #!/bin/sh -l
- 
-# delimiter for trivy json reports
-IFS=','
 
 image=$1
 report=$2
+
+# delimiter to parse image into image name and image tag
+IFS=":" read -r image_no_tag tag <<< $image
 
 # new patched image tag
 patched_tag="patched"
