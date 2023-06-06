@@ -6,8 +6,8 @@ export PATCHED=""
 
 for report in $1
 do
-    image="mcr.microsoft.com/oss/nginx/nginx:1.21.6"
-    image_no_tag="mcr.microsoft.com/oss/nginx/nginx"
+    image="docker.io/ashnam/nginx:1.21.6"
+    image_no_tag="docker.io/ashnam/nginx"
     patched_tag="patched"
     
     sudo copa patch -i "$image" -r /data/"$report" -t "$patched_tag" --addr tcp://0.0.0.0:8888

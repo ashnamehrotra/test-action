@@ -1,4 +1,7 @@
-on: [push]
+on:
+  push:
+    branches:
+      - 'main'
 
 jobs:
     test:
@@ -8,11 +11,31 @@ jobs:
         - name: Checkout repository
           uses: actions/checkout@v2
 
-        - name: copa action
+        - name: Copa Action
           id: copa
-          uses: ashnamehrotra/test-action@v1.5.5
+          uses: ashnamehrotra/test-action@v1.5.6
           with:
             image-reports: 'nginx.1.21.6.json'
 
         - name: View Output
           run: echo "${{ steps.copa.outputs.patched-images }}"
+
+        - name: Parse Patched Images List
+          run: |
+            LST="${{ steps.copa.outputs.patched-images }}"
+            IFS=',' read -ra IMAGES <<< "$LST"
+            echo "::set-output name=images::${IMAGES[@]}"
+
+        - name: Login to Docker Hub
+          uses: docker/login-action@v2
+          with:
+            username: ${{ secrets.DOCKERHUB_USERNAME }}
+            password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+        - name: Docker Push Patched Images
+          uses: docker/build-push-action@v4
+          with:
+            context: .
+            push: true
+            tags: |
+              ${{ join(steps.parse.outputs.images, '\n') }}
