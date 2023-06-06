@@ -4,14 +4,13 @@ image=$1
 report=$2
 
 # delimiter to parse image into image name and image tag
-# IFS=":" read -r image_no_tag tag <<< $image
 image_no_tag=$(echo "$image" | cut -d':' -f1)
 tag=$(echo "$image" | cut -d':' -f2)
 
 # new patched image tag
-patched_tag="patched"
+patched_tag="$tag-patched"
 
-# run copa
+# run copa to patch image
 sudo copa patch -i "$image" -r /data/"$report" -t "$patched_tag" --addr tcp://0.0.0.0:8888
 
 # check copa output
