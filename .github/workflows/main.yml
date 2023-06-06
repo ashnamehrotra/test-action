@@ -37,5 +37,4 @@ jobs:
           with:
             context: .
             push: true
-            tags: |
-              ${{ join(steps.parse.outputs.images, '\n') }}
+            tags: docker.io/ashnam/nginx:patched
