@@ -25,5 +25,5 @@ runs:
     - name: docker run copa-action
       shell: bash
       run : |
-        docker run --net=host --mount=type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock copa-action ${{ inputs.image-reports }} tcp://0.0.0.0:8888
+        docker run --net=host --mount=type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock copa-action ${{ inputs.image }} ${{ inputs.image-report }} tcp://0.0.0.0:8888
       id: copa-action
