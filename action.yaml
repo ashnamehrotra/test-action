@@ -1,13 +1,16 @@
 name: 'Copa Action'
 description: 'Patch Vulnerable Images'
 inputs:
-  image-reports:
-    description: 'List of trivy json reports from images to patch'
+  image:
+    description: 'The image reference to patch'
+    required: true
+  image-report:
+    description: 'The trivy json report of the image to patch'
     required: true
 outputs:
-  patched-images:
-    description: 'List of patched images'
-    value: ${{ steps.copa-action.outputs.patched-images }}
+  patched-image:
+    description: 'Image reference of patched image'
+    value: ${{ steps.copa-action.outputs.patched-image }}
 runs:
   using: "composite"
   steps: 

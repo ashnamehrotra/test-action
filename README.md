@@ -4,15 +4,19 @@ This action patches images using [Copa](https://github.com/project-copacetic/cop
 
 ## Inputs
 
-## `image-reports`
+## `image`
 
-**Required** The list of trivy json reports from images to patch.
+**Required** The image reference to patch.
+
+## `image-report`
+
+**Required** The trivy json report of the image to patch.
 
 ## Outputs
 
 ## `patched-images`
 
-The list of new patched images.
+Image reference of patched image.
 
 ## Example usage
 
