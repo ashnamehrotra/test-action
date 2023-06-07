@@ -12,9 +12,9 @@ This action patches images using [Copa](https://github.com/project-copacetic/cop
 
 **Required** The trivy json report of the image to patch.
 
-## Outputs
+## Output
 
-## `patched-images`
+## `patched-image`
 
 Image reference of patched image.
 

@@ -11,7 +11,7 @@ tag=$(echo "$image" | cut -d':' -f2)
 patched_tag="$tag-patched"
 
 # run copa to patch image
-sudo copa patch -i "$image" -r /data/"$report" -t "$patched_tag" --addr tcp://0.0.0.0:8888
+sudo copa patch -i "$image" -r /data/"$report" -t "$patched_tag" --addr tcp://0.0.0.0:8888 --debug
 
 # check copa output
 if [ $? -eq 0 ];  then
