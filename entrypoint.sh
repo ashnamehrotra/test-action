@@ -3,7 +3,7 @@
 image=$1
 report=$2
 
-# delimiter to parse image into image name and image tag
+# parse image into image name and image tag
 image_no_tag=$(echo "$image" | cut -d':' -f1)
 tag=$(echo "$image" | cut -d':' -f2)
 
