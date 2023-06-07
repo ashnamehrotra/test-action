@@ -52,6 +52,7 @@ jobs:
           uses: docker/build-push-action@v4
           with:
             push: true
+            load: true
             tags: ${{ steps.copa.outputs.patched-image }}
 
         - name: Run Docker images 3 - after push
