@@ -21,7 +21,7 @@ runs:
     - name: docker run buildkitd
       shell: bash
       run: |
-        docker run --net=host --detach --rm --privileged -p 127.0.0.1:8888:8888 --name buildkitd --entrypoint buildkitd moby/buildkit:v0.11.4 --addr tcp://0.0.0.0:8888
+        docker run --net=host --detach --rm --privileged -p 127.0.0.1:8888:8888 --name buildkitd --entrypoint buildkitd moby/buildkit:latest --addr tcp://0.0.0.0:8888
     - name: docker run copa-action
       shell: bash
       run : |
