@@ -49,10 +49,8 @@ jobs:
             password: ${{ secrets.DOCKERHUB_TOKEN }}
 
         - name: Docker Push Patched Image
-          uses: docker/build-push-action@v4
-          with:
-            load: true
-            tags: ${{ steps.copa.outputs.patched-image }}
+          run: |
+            docker push ${{ steps.copa.outputs.patched-image }}
 
         - name: Run Docker images 3 - after push
           run: |
