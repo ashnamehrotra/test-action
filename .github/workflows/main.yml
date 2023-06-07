@@ -51,7 +51,6 @@ jobs:
         - name: Docker Push Patched Image
           uses: docker/build-push-action@v4
           with:
-            context: .
             push: true
             tags: ${{ steps.copa.outputs.patched-image }}
 
