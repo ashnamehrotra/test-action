@@ -17,7 +17,20 @@ jobs:
         - name: Set up Docker Buildx
           uses: docker/setup-buildx-action@v2
 
-        - name: Run Trivy vulnerability scanner
+        - name: Run Trivy Vulnerability Scanner
+          uses: aquasecurity/trivy-action@master
+          id: trivy
+          with:
+            output: template
+            template: '{{len .Vulnerabilities}}'
+            image-ref: ${{ matrix.images }}
+
+        - name: Check Vuln Count
+          run: |
+            output=${{ steps.trivy.outputs.resulst }}
+            echo "$output"
+
+        - name: Generate Trivy Report
           uses: aquasecurity/trivy-action@master
           with:
             scan-type: 'image'
