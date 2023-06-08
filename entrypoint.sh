@@ -12,7 +12,7 @@ old_tag=$(echo "$image" | cut -d':' -f2)
 new_tag="$old_tag$patched_tag"
 
 # run copa to patch image
-sudo copa patch -i "$image" -r /data/"$report" -t "$new_tag" --addr tcp://0.0.0.0:8888 --debug
+sudo copa patch -i "$image" -r /data/"$report" -t "$new_tag" --addr tcp://0.0.0.0:8888
 
 # check copa output
 if [ $? -eq 0 ];  then
