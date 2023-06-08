@@ -12,6 +12,10 @@ This action patches images using [Copa](https://github.com/project-copacetic/cop
 
 **Required** The trivy json report of the image to patch.
 
+## `patched-tag`
+
+**Required** The patched image tag to append to the original tag.
+
 ## Output
 
 ## `patched-image`
@@ -37,6 +41,9 @@ jobs:
         - name: Checkout repository
           uses: actions/checkout@v2
 
+        - name: Set up Docker Buildx
+          uses: docker/setup-buildx-action@v2
+
         - name: Run Trivy vulnerability scanner
           uses: aquasecurity/trivy-action@master
           with:
@@ -49,7 +56,7 @@ jobs:
 
         - name: Copa Action
           id: copa
-          uses: ashnamehrotra/test-action@v1.6.3
+          uses: ashnamehrotra/test-action@v1.6.4
           with:
             image: ${{ matrix.images }}
             image-report: 'report.json'
@@ -60,10 +67,7 @@ jobs:
             username: 'ashnam'
             password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-        - name: Docker Push Patched Images
-          uses: docker/build-push-action@v4
-          with:
-            context: .
-            push: true
-            tags: ${{ steps.copa.outputs.patched-image }}
+        - name: Docker Push Patched Image
+          run: |
+            docker push ${{ steps.copa.outputs.patched-image }}
 ```
