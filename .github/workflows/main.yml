@@ -17,20 +17,6 @@ jobs:
         - name: Set up Docker Buildx
           uses: docker/setup-buildx-action@v2
 
-        - name: Run Trivy Vulnerability Scanner
-          uses: aquasecurity/trivy-action@master
-          id: trivy
-          with:
-            format: table
-            image-ref: ${{ matrix.images }}
-
-        - name: Check Vuln Count
-          run: |
-            trivy_output=$(cat trivy-results.txt)
-            vuln_count=$(echo "$trivy_output" | grep -c 'CVE-[0-9]*-[0-9]*')
-            echo "OUTPUT $trivy_output"
-            echo "COUNT $vuln_count"
-
         - name: Generate Trivy Report
           uses: aquasecurity/trivy-action@master
           with:
@@ -40,6 +26,12 @@ jobs:
             ignore-unfixed: true
             vuln-type: 'os'
             image-ref: ${{ matrix.images }}
+
+        - name: Check Vuln Count
+          run: |
+            report_file="report.json"
+            vulnerability_count=$(jq '.[0].Vulnerabilities | length' "$report_file")
+            echo "Number of vulnerabilities found: $vulnerability_count"
 
         - name: Copa Action
           id: copa
