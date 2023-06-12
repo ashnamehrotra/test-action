@@ -21,15 +21,15 @@ jobs:
           uses: aquasecurity/trivy-action@master
           id: trivy
           with:
-            output: template
             format: table
-            template: '{{len .Vulnerabilities}}'
             image-ref: ${{ matrix.images }}
 
         - name: Check Vuln Count
           run: |
-            output=${{ steps.trivy.outputs.result }}
-            echo "$output"
+            trivy_output=$(cat trivy-results.txt)
+            vuln_count=$(echo "$trivy_output" | grep -c 'CVE-[0-9]*-[0-9]*')
+            echo "OUTPUT $trivy_output"
+            echo "COUNT $vuln_count"
 
         - name: Generate Trivy Report
           uses: aquasecurity/trivy-action@master
