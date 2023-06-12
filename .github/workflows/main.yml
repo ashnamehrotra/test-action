@@ -27,7 +27,7 @@ jobs:
 
         - name: Check Vuln Count
           run: |
-            output=${{ steps.trivy.outputs.resulst }}
+            output=${{ steps.trivy.outputs.result }}
             echo "$output"
 
         - name: Generate Trivy Report
