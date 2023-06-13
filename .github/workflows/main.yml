@@ -27,6 +27,9 @@ jobs:
             vuln-type: 'os'
             image-ref: ${{ matrix.images }}
 
+        - name: Print Trivy Report
+          run: cat report.json
+
         - name: Check Vuln Count
           run: |
             report_file="report.json"
