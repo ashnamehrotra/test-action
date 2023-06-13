@@ -31,11 +31,11 @@ jobs:
           id: vuln_cout
           run: |
             report_file="report.json"
-            vuln_count=$(( $(jq '.Results | length' "$report_file") ))
+            vuln_count=$(jq '.Results | length' "$report_file")
             echo "::set-output name=vuln_count::$vuln_count"
 
         - name: Copa Action
-          if: ${{ steps.check_vuln_count.outputs.vul > 0 }}
+          if: ${{ steps.check_vuln_count.outputs.vul != '0' }}
           id: copa
           uses: ashnamehrotra/test-action@v1.6.6
           with:
