@@ -27,16 +27,14 @@ jobs:
             vuln-type: 'os'
             image-ref: ${{ matrix.images }}
 
-        - name: Print Trivy Report
-          run: cat report.json
-
         - name: Check Vuln Count
+          id: vuln_cout
           run: |
             report_file="report.json"
-            vulnerability_count=$(jq '.Results | length' "$report_file")
-            echo "Number of vulnerabilities found: $vulnerability_count"
+            vuln_count=$(jq '.Results | length' "$report_file")
 
         - name: Copa Action
+          if: ${{ steps.vuln_count.outputs.vuln_count > 0 }}
           id: copa
           uses: ashnamehrotra/test-action@v1.6.6
           with:
@@ -45,11 +43,13 @@ jobs:
             patched-tag: '-patched'
 
         - name: Login to Docker Hub
+          if: ${{ success() }}
           uses: docker/login-action@v2
           with:
             username: 'ashnam'
             password: ${{ secrets.DOCKERHUB_TOKEN }}
 
         - name: Docker Push Patched Image
+          if: ${{ success() }}
           run: |
             docker push ${{ steps.copa.outputs.patched-image }}
