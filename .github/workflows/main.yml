@@ -32,6 +32,7 @@ jobs:
           run: |
             report_file="report.json"
             vuln_count=$(jq '.Results | length' "$report_file")
+            echo "OUTPUT $vuln_count"
             echo "::set-output name=vuln_count::$vuln_count"
 
         - name: Copa Action
