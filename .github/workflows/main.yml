@@ -32,6 +32,7 @@ jobs:
           run: |
             report_file="report.json"
             vuln_count=$(jq '.Results | length' "$report_file")
+            echo "::set-output name=vuln_count::$vuln_count"
 
         - name: Copa Action
           if: ${{ steps.vuln_count.outputs.vuln_count > 0 }}
@@ -43,13 +44,14 @@ jobs:
             patched-tag: '-patched'
 
         - name: Login to Docker Hub
-          if: ${{ success() }}
+          if: steps.copa.conclusion == 'success'
+          id: login
           uses: docker/login-action@v2
           with:
             username: 'ashnam'
             password: ${{ secrets.DOCKERHUB_TOKEN }}
 
         - name: Docker Push Patched Image
-          if: ${{ success() }}
+          if: steps.login.conclusion == 'success'
           run: |
             docker push ${{ steps.copa.outputs.patched-image }}
