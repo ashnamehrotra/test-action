@@ -13,7 +13,7 @@ VOLUME /data
 
 # Install required packages
 RUN apt update && \
-    apt install -y wget tar ca-certificates gnupg lsb-release --no-install-recommends
+    apt install -y wget tar ca-certificates gnupg --no-install-recommends
 
 # Install Copa
 RUN wget --tries=10 -q https://github.com/project-copacetic/copacetic/releases/download/v0.2.0/copa_0.2.0_linux_amd64.tar.gz && \
@@ -22,7 +22,10 @@ RUN wget --tries=10 -q https://github.com/project-copacetic/copacetic/releases/d
 
 # Install Docker
 RUN wget --tries=10 -qO- https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg && \
-    echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null && \
+    echo \
+        "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
+        "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+    sudo tee /etc/apt/sources.list.d/docker.list > /dev/null && \
     apt update && \
     apt install -y docker-ce docker-ce-cli containerd.io --no-install-recommends
 
