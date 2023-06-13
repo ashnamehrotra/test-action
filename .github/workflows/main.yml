@@ -33,7 +33,7 @@ jobs:
         - name: Check Vuln Count
           run: |
             report_file="report.json"
-            vulnerability_count=$(jq '.[0].Vulnerabilities | length' "$report_file")
+            vulnerability_count=$(jq '.Results | length' "$report_file")
             echo "Number of vulnerabilities found: $vulnerability_count"
 
         - name: Copa Action
