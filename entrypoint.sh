@@ -14,8 +14,8 @@ new_tag="$old_tag$patched_tag"
 # run copa to patch image
 if copa patch -i "$image" -r /data/"$report" -t "$new_tag" --addr tcp://0.0.0.0:8888;
 then
-    # output patched image name
-    echo "$image_no_tag:$new_tag"
+    patched_image="$image_no_tag:$new_tag"
+    printf '%s\n' "$patched_image"
 else
-    echo "Error patching image $image with copa"
+    print "Error patching image $image with copa"
 fi
