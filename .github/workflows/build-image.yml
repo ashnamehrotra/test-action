@@ -19,3 +19,5 @@ jobs:
           push: true
           tags: ghcr.io/${{ github.repository }}:latest
           labels: org.opencontainers.image.source=${{ github.repository }}@${{ github.sha }}
+        env:
+          DOCKER_AUTH_CONFIG: '{"auths":{"ghcr.io":{"username":"$GITHUB_REPOSITORY","password":"${{ secrets.GHCR_TOKEN }}","email":"ashnamehrotra@gmail.com"}}}'
