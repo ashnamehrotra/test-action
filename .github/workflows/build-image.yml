@@ -17,5 +17,5 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/${{ github.repository }}:${{ github.ref }}
+          tags: ghcr.io/${{ github.repository }}:latest
           labels: org.opencontainers.image.source=${{ github.repository }}@${{ github.sha }}
