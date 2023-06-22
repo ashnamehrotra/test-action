@@ -32,3 +32,5 @@ runs:
       shell: bash
       run : |
         docker run --net=host --mount=type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock copa-action ${{ inputs.image }} ${{ inputs.image-report }} ${{ inputs.patched-tag }} tcp://0.0.0.0:8888
+        patched-image=$(docker logs copa-action)
+        echo "patched-image=$patched-image" >> $GITHUB_OUTPUT
