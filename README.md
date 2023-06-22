@@ -25,6 +25,7 @@ Image reference of patched image.
 ## Example usage
 
 ```
+name: "Copa"
 on: [push]
 
 jobs:
@@ -40,6 +41,9 @@ jobs:
         steps:
         - name: Checkout repository
           uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3.5.3
+          with:
+            repository: ashnamehrotra/test-action
+            ref: main
 
         - name: Set up Docker Buildx
           uses: docker/setup-buildx-action@ecf95283f03858871ff00b787d79c419715afc34
@@ -64,7 +68,7 @@ jobs:
         - name: Copa Action
           if: steps.vuln_cout.outputs.vuln_count != '0'
           id: copa
-          uses: ashnamehrotra/test-action@latest
+          uses: ashnamehrotra/test-action@v1.8.8
           with:
             image: ${{ matrix.images }}
             image-report: 'report.json'
