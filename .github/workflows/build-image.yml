@@ -1,4 +1,6 @@
 name: build and push copa action image
+on: [push]
+
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
