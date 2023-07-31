@@ -32,5 +32,6 @@ jobs:
 
       - name: Bats Test
         run: |
-          chmod +x entrypoint.sh
-          bats --recursive --timing .
+          cd ${{ github.workspace }}/test
+          chmod +x ../entrypoint.sh
+          ./test.bats
