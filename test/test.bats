@@ -11,6 +11,11 @@ teardown() {
     docker stop buildkitd2
 }
 
+@test "docker images" {
+    docker images 
+    assert equal "$output" ""
+}
+
 @test "Check patched docker image IDs" {
     run docker images --quiet 'nginx:1.21.6-patched'
     id="$output"
