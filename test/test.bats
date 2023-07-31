@@ -17,16 +17,6 @@ teardown() {
     assert_equal "$id" "4cccbf1e3e56"
 }
 
-@test "Debugging" {
-    run docker images 
-    id="$output"
-    echo "$id"
-    run docker ps
-    id="$output"
-    echo "$id"
-    assert_equal "" ""
-}
-
 @test "Run trivy on patched image" {
     run trivy image --vuln-type os --ignore-unfixed -f json -o nginx.1.21.6-patched.json 'docker.io/library/nginx:1.21.6-patched'
     run diff "./data/patched-report.json" "nginx.1.21.6-patched.json"
