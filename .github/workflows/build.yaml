@@ -30,6 +30,9 @@ jobs:
             tar -zxvf copa.tar.gz 
             cp copa /usr/local/bin/
 
+      - name: Pull docker.io/library/nginx:1.21.6 for test
+        run: docker pull docker.io/library/nginx:1.21.6
+
       - name: Bats Test
         run: |
           chmod +x ${{ github.workspace }}/entrypoint.sh
