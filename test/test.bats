@@ -19,7 +19,11 @@ teardown() {
 
 @test "Debugging" {
     run docker images 
+    id="$output"
+    echo "$id"
     run docker ps
+    id="$output"
+    echo "$id"
     assert_equal "" ""
 }
 
