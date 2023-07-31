@@ -32,6 +32,8 @@ jobs:
 
       - name: Bats Test
         run: |
-          chmod +x ./entrypoint.sh
+          chmod +x ${{ github.workspace }}/entrypoint.sh
+          ls -l
           cd ${{ github.workspace }}/test
+          ls -l
           ./test.bats
