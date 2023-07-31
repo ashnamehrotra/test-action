@@ -15,8 +15,12 @@ teardown() {
     run docker images --quiet 'nginx:1.21.6-patched'
     id="$output"
     assert_equal "$id" "4cccbf1e3e56"
-    docker images
-    docker ps
+}
+
+@test "Debugging" {
+    run docker images 
+    run docker ps
+    assert_equal "" ""
 }
 
 @test "Run trivy on patched image" {
