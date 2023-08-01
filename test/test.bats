@@ -3,11 +3,11 @@
 load helpers
 
 teardown() {
-    docker stop buildkitd
+    sudo docker stop buildkitd
 }
 
 @test "Run copa on docker.io/library/nginx:1.21.6" {
-    docker run --detach -rm --network host --name buildkitd --entrypoint buildkitd moby/buildkit:v0.12.0 --addr 'tcp://0.0.0.0:8888'
+    docker run --detach --rm --network host --name buildkitd --entrypoint buildkitd moby/buildkit:v0.12.0 --addr 'tcp://0.0.0.0:8888'
     run ../entrypoint.sh 'docker.io/library/nginx:1.21.6' 'nginx.1.21.6.json' '1.21.6-patched'
     assert_success
 }
