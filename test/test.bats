@@ -2,13 +2,18 @@
 
 load helpers
 
-setup() {
-    docker run --detach --rm --privileged -p '0.0.0.0:8888:8888/tcp' --name buildkitd --entrypoint buildkitd moby/buildkit:v0.12.0 --addr 'tcp://0.0.0.0:8888'
-    run ../entrypoint.sh 'docker.io/library/nginx:1.21.6' 'nginx.1.21.6.json' '1.21.6-patched'
-}
-
 teardown() {
     docker stop buildkitd
+}
+
+@test "Run buildkitd" {
+    docker run --detach --rm --privileged -p '0.0.0.0:8888:8888/tcp' --name buildkitd --entrypoint buildkitd moby/buildkit:v0.12.0 --addr 'tcp://0.0.0.0:8888'
+    assert_success
+}
+
+@test "Run copa on docker.io/library/nginx:1.21.6" {
+    run ../entrypoint.sh 'docker.io/library/nginx:1.21.6' 'nginx.1.21.6.json' '1.21.6-patched'
+    assert_success
 }
 
 @test "Check patched docker image IDs" {
