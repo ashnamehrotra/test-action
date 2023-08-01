@@ -19,8 +19,8 @@ jobs:
 
       - name: Install Trivy
         run: |
-            curl https://github.com/aquasecurity/trivy/releases/download/v${{ env.TRIVY_VERSION }}/trivy_${{ env.TRIVY_VERSION }}_Linux-64bit.tar.gz
-            tar -zxvf trivy_0.44.0_Linux-64bit.tar.gz
+            curl -fsSL -o trivy.tar.gz https://github.com/aquasecurity/trivy/releases/download/v${{ env.TRIVY_VERSION }}/trivy_${{ env.TRIVY_VERSION }}_Linux-64bit.tar.gz
+            tar -zxvf trivy.tar.gz
             cp trivy /usr/local/bin/
 
       - name: Set up Docker
