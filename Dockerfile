@@ -8,9 +8,6 @@ ARG copa_version
 # Copies your code file from your action repository to the filesystem path `/` of the container
 COPY entrypoint.sh /entrypoint.sh 
 
-# Mount data volume
-VOLUME /data
-
 # Install required packages
 RUN apt-get update && \
     apt-get install -y tar ca-certificates gnupg curl jq --no-install-recommends && \
