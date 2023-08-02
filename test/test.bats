@@ -2,7 +2,7 @@
 
 load helpers
 
-teardown() {
+teardown_file() {
     sudo docker stop buildkitd
 }
 
