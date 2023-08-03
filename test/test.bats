@@ -2,24 +2,9 @@
 
 load helpers
 
-setup(){
-    docker run --net=host --detach --rm --privileged -p 127.0.0.1:8888:8888 --name buildkitd2 --entrypoint buildkitd moby/buildkit:v0.12.0 --addr tcp://0.0.0.0:8888
-}
-
-teardown(){
-    docker ps -a
-    sudo docker stop buildkitd2
-}
-
-@test "Run copa in container" {
-    current_dir=$(pwd)
-    run docker run \
-        --net=host \
-        --mount=type=bind,source=$current_dir/data,target=/data \
-        --mount=type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
-        --mount=type=bind,source=$GITHUB_OUTPUT,target=$GITHUB_OUTPUT -e GITHUB_OUTPUT \
-        --name=copa-action2 \
-        copa-action 'docker.io/library/nginx:1.21.6' 'nginx.1.21.6.json' '1.21.6-patched'
+@test "Run copa" {
+    run sudo buildkitd &
+    run ../entrypoint.sh 'docker.io/library/nginx:1.21.6' 'nginx.1.21.6.json' '1.21.6-patched'
     assert_success
 }
 
