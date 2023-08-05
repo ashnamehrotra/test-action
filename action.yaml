@@ -26,11 +26,11 @@ runs:
       run: |
         if [ -z "${{ inputs.copa-version }}" ]; then
           latest_tag=$(curl -s "https://api.github.com/repos/project-copacetic/copacetic/releases/latest" | jq -r '.tag_name')
-          echo "COPA_VERSION=${latest:1}" >> $GITHUB_ENV
+          echo "VERSION=${latest:1}" >> $GITHUB_ENV
         else
-          echo "COPA_VERSION=${{ inputs.copa-version }}" >> $GITHUB_ENV
+          echo "VERSION=${{ inputs.copa-version }}" >> $GITHUB_ENV
         fi
-        docker pull ghcr.io/project-copacetic/copa-action/copa-action:v${COPA_VERSION}
+        docker pull ghcr.io/project-copacetic/copa-action/copa-action:v${VERSION}
     - name: docker run buildkitd
       shell: bash
       run: |
@@ -39,4 +39,4 @@ runs:
       id: copa-action
       shell: bash
       run : |
-        docker run --net=host --mount=type=bind,source=$(pwd),target=/data --mount=type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock --mount=type=bind,source=$GITHUB_OUTPUT,target=$GITHUB_OUTPUT -e GITHUB_OUTPUT --name=copa-action ghcr.io/project-copacetic/copa-action/copa-action:v${COPA_VERSION} ${{ inputs.image }} ${{ inputs.image-report }} ${{ inputs.patched-tag }}
+        docker run --net=host --mount=type=bind,source=$(pwd),target=/data --mount=type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock --mount=type=bind,source=$GITHUB_OUTPUT,target=$GITHUB_OUTPUT -e GITHUB_OUTPUT --name=copa-action ghcr.io/project-copacetic/copa-action/copa-action:v${VERSION} ${{ inputs.image }} ${{ inputs.image-report }} ${{ inputs.patched-tag }}
