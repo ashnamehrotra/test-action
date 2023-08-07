@@ -21,7 +21,7 @@ outputs:
 runs:
   using: "composite"
   steps: 
-    - name: docker build copa-action
+    - name: docker pull copa-action
       shell: bash
       run: |
         if [ -z "${{ inputs.copa-version }}" ]; then
@@ -30,7 +30,8 @@ runs:
         else
           echo "VERSION=${{ inputs.copa-version }}" >> $GITHUB_ENV
         fi
-        docker pull ghcr.io/project-copacetic/copa-action/copa-action:v${VERSION}
+        docker pull ghcr.io/project-copacetic/copa-action/copa-action:v0.3.0
+        docker images
     - name: docker run buildkitd
       shell: bash
       run: |
