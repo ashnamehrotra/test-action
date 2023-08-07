@@ -26,7 +26,7 @@ runs:
       run: |
         if [ -z "${{ inputs.copa-version }}" ]; then
           latest_tag=$(curl -s "https://api.github.com/repos/project-copacetic/copacetic/releases/latest" | jq -r '.tag_name')
-          version=${latest:1}
+          version=${latest_tag:1}
         else
           version="${{ inputs.copa-version }}"
         fi
