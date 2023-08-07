@@ -1,4 +1,4 @@
-name: 'Test Action'
+name: 'Test Copa Action'
 description: 'Patch Vulnerable Images'
 inputs:
   image:
