@@ -34,7 +34,7 @@ jobs:
         - name: Copa Action
           if: steps.vuln_cout.outputs.vuln_count != '0'
           id: copa
-          uses: ashnamehrotra/test-action@v3.2.0
+          uses: ashnamehrotra/test-action@v3.2.1
           with:
             image: ${{ matrix.images }}
             image-report: 'report.json'

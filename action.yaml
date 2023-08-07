@@ -28,7 +28,7 @@ runs:
           latest_tag=$(curl -s "https://api.github.com/repos/project-copacetic/copacetic/releases/latest" | jq -r '.tag_name')
           export VERSION=${latest:1}
         else
-          export VERSION=${{ inputs.copa-version }}"
+          export VERSION="${{ inputs.copa-version }}"
         fi
         docker pull ghcr.io/project-copacetic/copa-action/copa-action:v${VERSION}
         docker images
