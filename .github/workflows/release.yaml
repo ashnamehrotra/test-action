@@ -28,4 +28,4 @@ jobs:
 
         - name: Build and push copa-action image with new version
           run: |
-            docker buildx build --build-arg copa_version=${{ github.event.inputs.copa-version }} -t ghcr.io/ashnamehrotra/copa-action:v"$tag" --push .
+            docker buildx build --build-arg copa_version=${{ github.event.inputs.copa-version }} -t ghcr.io/ashnamehrotra/copa-action:v${{ github.event.inputs.copa-version }} --push .
